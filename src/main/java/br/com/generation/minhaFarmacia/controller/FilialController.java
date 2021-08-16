@@ -14,46 +14,43 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import br.com.generation.minhaFarmacia.model.Categoria;
-import br.com.generation.minhaFarmacia.repository.CategoriaRepository;
+ 
+import br.com.generation.minhaFarmacia.model.Filial;
+import br.com.generation.minhaFarmacia.repository.FilialRepository;
 
 @RestController
-@RequestMapping("/categorias")
+@RequestMapping("/filiais")
 @CrossOrigin("*")
-public class CategoriaController {
+public class FilialController {
 	
+	@Autowired
+	private FilialRepository repository;
 	
-  @Autowired
- private CategoriaRepository repository;
-	
-  	@GetMapping
-  	public ResponseEntity<List<Categoria>> findAllCategoria(){
+	@GetMapping
+  	public ResponseEntity<List<Filial>> findAllFilial(){
        return ResponseEntity.ok(repository.findAll());		
   	}
  
  
   	@GetMapping("/id/{id}")
-	public ResponseEntity<Categoria> findByIdCategoria(@PathVariable long id){
+	public ResponseEntity<Filial> findByIdFilial(@PathVariable long id){
 		return repository.findById(id).map(resp -> ResponseEntity.ok(resp)).orElse(ResponseEntity.notFound().build());
 	}
  
 	@PostMapping
-	public ResponseEntity<Categoria> postCategoria(@RequestBody Categoria categoria){
-		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(categoria));
+	public ResponseEntity<Filial> postFilial(@RequestBody Filial filial){
+		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(filial));
 	}
 	
 	@PutMapping
-	public ResponseEntity<Categoria> putCategoria(@RequestBody Categoria categoria){
-		return ResponseEntity.status(HttpStatus.OK).body(repository.save(categoria));
+	public ResponseEntity<Filial> putFilial(@RequestBody Filial filial){
+		return ResponseEntity.status(HttpStatus.OK).body(repository.save(filial));
 	}
 	
 	@DeleteMapping("/delete/{id}")
-	public void deleteCategoria(@PathVariable long id){
+	public void deleteFilial(@PathVariable long id){
 		repository.deleteById(id);
 	}
 	
-	
  
-
 }

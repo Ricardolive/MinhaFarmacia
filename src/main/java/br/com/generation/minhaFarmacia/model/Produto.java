@@ -1,5 +1,6 @@
 package br.com.generation.minhaFarmacia.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,19 +23,26 @@ public class Produto {
  private long id;
  
  @NotNull
- @Size(min=3,max=100)
+ @Size(min=3,max=100, message="O atributo nome deve conter 3 a 100 caracteres")
  private String nome;
  
- @Size(max=100)
+ @Size(max=100, message="O atributo descrição deve conter no maximo 100 caracteres")
  private String descricao;
  
+ private String imagem;
+ 
+ @Column(columnDefinition = "text")
+ private String texto;
+ 
  @NotNull
- @Size(min=3,max=100)
- private String fabricante;
+ private double preco;
  
  @ManyToOne
  @JsonIgnoreProperties("produto")
- @NotNull
+ private Fornecedor fornecedor;
+ 
+ @ManyToOne
+ @JsonIgnoreProperties("produto")
    private Categoria categoria;
 
 public long getId() {
@@ -61,12 +69,36 @@ public void setDescricao(String descricao) {
 	this.descricao = descricao;
 }
 
-public String getFabricante() {
-	return fabricante;
+public String getImagem() {
+	return imagem;
 }
 
-public void setFabricante(String fabricante) {
-	this.fabricante = fabricante;
+public void setImagem(String imagem) {
+	this.imagem = imagem;
+}
+
+public String getTexto() {
+	return texto;
+}
+
+public void setTexto(String texto) {
+	this.texto = texto;
+}
+
+public double getPreco() {
+	return preco;
+}
+
+public void setPreco(double preco) {
+	this.preco = preco;
+}
+
+public Fornecedor getFornecedor() {
+	return fornecedor;
+}
+
+public void setFornecedor(Fornecedor fornecedor) {
+	this.fornecedor = fornecedor;
 }
 
 public Categoria getCategoria() {
@@ -76,11 +108,7 @@ public Categoria getCategoria() {
 public void setCategoria(Categoria categoria) {
 	this.categoria = categoria;
 }
-	
-	
-	
-	
-	
-	
+ 
+ 
 
 }

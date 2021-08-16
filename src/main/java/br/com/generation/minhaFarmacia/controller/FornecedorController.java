@@ -15,45 +15,45 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.generation.minhaFarmacia.model.Categoria;
-import br.com.generation.minhaFarmacia.repository.CategoriaRepository;
+import br.com.generation.minhaFarmacia.model.Fornecedor;
+import br.com.generation.minhaFarmacia.repository.FornecedorRepository;
 
 @RestController
-@RequestMapping("/categorias")
+@RequestMapping("/fornecedores")
 @CrossOrigin("*")
-public class CategoriaController {
+public class FornecedorController {
+
 	
+	@Autowired
+	private FornecedorRepository repository;
 	
-  @Autowired
- private CategoriaRepository repository;
-	
-  	@GetMapping
-  	public ResponseEntity<List<Categoria>> findAllCategoria(){
+	@GetMapping
+  	public ResponseEntity<List<Fornecedor>> findAllFornecedor(){
        return ResponseEntity.ok(repository.findAll());		
   	}
  
  
   	@GetMapping("/id/{id}")
-	public ResponseEntity<Categoria> findByIdCategoria(@PathVariable long id){
+	public ResponseEntity<Fornecedor> findByIdFornecedor(@PathVariable long id){
 		return repository.findById(id).map(resp -> ResponseEntity.ok(resp)).orElse(ResponseEntity.notFound().build());
 	}
  
 	@PostMapping
-	public ResponseEntity<Categoria> postCategoria(@RequestBody Categoria categoria){
-		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(categoria));
+	public ResponseEntity<Fornecedor> postFornecedor(@RequestBody Fornecedor fornecedor){
+		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(fornecedor));
 	}
 	
 	@PutMapping
-	public ResponseEntity<Categoria> putCategoria(@RequestBody Categoria categoria){
-		return ResponseEntity.status(HttpStatus.OK).body(repository.save(categoria));
+	public ResponseEntity<Fornecedor> putFornecedor(@RequestBody Fornecedor fornecedor){
+		return ResponseEntity.status(HttpStatus.OK).body(repository.save(fornecedor));
 	}
 	
 	@DeleteMapping("/delete/{id}")
-	public void deleteCategoria(@PathVariable long id){
+	public void deleteFornecedor(@PathVariable long id){
 		repository.deleteById(id);
 	}
 	
 	
- 
-
+	
+	
 }

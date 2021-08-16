@@ -2,11 +2,9 @@ package br.com.generation.minhaFarmacia.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import br.com.generation.minhaFarmacia.model.Fornecedor;
 
-import br.com.generation.minhaFarmacia.model.Produto;
+@Repository
+public interface FornecedorRepository extends JpaRepository<Fornecedor, Long>{
 
-@Repository		
-public interface ProdutoRepository extends JpaRepository<Produto,Long>{
-
-	 
 }

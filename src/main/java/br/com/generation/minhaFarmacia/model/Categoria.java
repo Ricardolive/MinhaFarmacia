@@ -25,14 +25,14 @@ public class Categoria {
 private long id;
 
 @NotNull
-@Size(min=3, max=100)
+@Size(min=3, max=100,  message="O atributo nome deve conter 3 a 100 caracteres")
 private String nome;
 
 @NotNull
-@Size(max=100)
+@Size(max=100,  message="O atributo descrição deve conter no máximo 100 caracteres")
 private String descricao;
 
-@OneToMany(mappedBy="categoria",cascade= CascadeType.ALL)
+@OneToMany(mappedBy="categoria",cascade= CascadeType.REMOVE)
 @JsonIgnoreProperties("categoria")
   private List<Produto> produto;
 
@@ -68,7 +68,7 @@ public void setProduto(List<Produto> produto) {
 	this.produto = produto;
 }
 
-
+ 
 	
 
 }

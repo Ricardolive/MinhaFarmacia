@@ -15,45 +15,46 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.generation.minhaFarmacia.model.Categoria;
-import br.com.generation.minhaFarmacia.repository.CategoriaRepository;
+import br.com.generation.minhaFarmacia.model.Venda;
+import br.com.generation.minhaFarmacia.repository.VendaRepository;
+ 
 
+ 
+ 
 @RestController
-@RequestMapping("/categorias")
+@RequestMapping("/vendas")
 @CrossOrigin("*")
-public class CategoriaController {
+public class VendaController {
 	
+	@Autowired
+	private VendaRepository repository;
 	
-  @Autowired
- private CategoriaRepository repository;
-	
-  	@GetMapping
-  	public ResponseEntity<List<Categoria>> findAllCategoria(){
+	@GetMapping
+  	public ResponseEntity<List<Venda>> findAllVenda(){
        return ResponseEntity.ok(repository.findAll());		
   	}
  
  
   	@GetMapping("/id/{id}")
-	public ResponseEntity<Categoria> findByIdCategoria(@PathVariable long id){
+	public ResponseEntity<Venda> findByIdVenda(@PathVariable long id){
 		return repository.findById(id).map(resp -> ResponseEntity.ok(resp)).orElse(ResponseEntity.notFound().build());
 	}
  
 	@PostMapping
-	public ResponseEntity<Categoria> postCategoria(@RequestBody Categoria categoria){
-		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(categoria));
+	public ResponseEntity<Venda> postVenda(@RequestBody Venda venda){
+		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(venda));
 	}
 	
 	@PutMapping
-	public ResponseEntity<Categoria> putCategoria(@RequestBody Categoria categoria){
-		return ResponseEntity.status(HttpStatus.OK).body(repository.save(categoria));
+	public ResponseEntity<Venda> putVenda(@RequestBody Venda venda){
+		return ResponseEntity.status(HttpStatus.OK).body(repository.save(venda));
 	}
 	
 	@DeleteMapping("/delete/{id}")
-	public void deleteCategoria(@PathVariable long id){
+	public void deleteVenda(@PathVariable long id){
 		repository.deleteById(id);
 	}
-	
-	
+		
  
 
 }
