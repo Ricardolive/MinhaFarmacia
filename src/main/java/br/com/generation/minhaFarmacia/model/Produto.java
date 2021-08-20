@@ -1,10 +1,14 @@
 package br.com.generation.minhaFarmacia.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
@@ -44,6 +48,11 @@ public class Produto {
  @ManyToOne
  @JsonIgnoreProperties("produto")
    private Categoria categoria;
+ 
+ @JsonIgnoreProperties("produto")
+ @ManyToMany(mappedBy = "produto", cascade= CascadeType.ALL)
+ private List<Venda> venda;
+ 
 
 public long getId() {
 	return id;
@@ -107,6 +116,14 @@ public Categoria getCategoria() {
 
 public void setCategoria(Categoria categoria) {
 	this.categoria = categoria;
+}
+
+public List<Venda> getVenda() {
+	return venda;
+}
+
+public void setVenda(List<Venda> venda) {
+	this.venda = venda;
 }
  
  
